@@ -1,0 +1,27 @@
+# Theme metadata
+name = "Wald"
+
+# Is theme light or dark?
+is_light = false
+
+# Primary
+primary = "rgb(255, 0, 60)"
+
+# Menu
+menu_primary = "khaki"
+menu_text = "#000"
+menu_text_active = "rgb(255, 0, 60)"
+menu_title = "#000"
+
+
+[dark]
+  # Menu
+  menu_primary = "khaki"
+  menu_text = "#000"
+  menu_text_active = "#000"
+  menu_title = "#000"
+
+  # Backgrounds
+  background = "yellowgreen"
+  home_section_odd = "blue"
+  home_section_even = "pink"

@@ -1,0 +1,43 @@
+{{/* Video Shortcode for Wowchemy. */}}
+{{/* Load video from page dir falling back to media library at `assets/media/` and then to remote URI. */}}
+
+{{ $destination := .Get "src" }}
+{{ $video_ext_with_dot := path.Ext (.Get "src") }}
+{{ $video_ext := strings.TrimPrefix "." $video_ext_with_dot }}
+{{ $video_type := $video_ext }}
+{{ $destination_preview := (.Get "poster") | default (replace $destination $video_ext_with_dot ".jpg") }}
+{{ $is_remote := strings.HasPrefix $destination "http" }}
+{{- $asset := "" -}}
+{{- $asset_preview := "" -}}
+{{- if not $is_remote -}}
+  {{- $asset = (.Page.Resources.ByType "video").GetMatch $destination -}}
+  {{- $asset_preview = (.Page.Resources.ByType "image").GetMatch $destination_preview -}}
+  {{- if not $asset -}}
+    {{- $asset = resources.Get (path.Join "media" $destination) -}}
+    {{- $asset_preview = resources.Get (path.Join "media" $destination_preview) -}}
+  {{- end -}}
+  {{ $video_type = $asset.MediaType.SubType }}
+{{- end -}}
+
+{{ if $asset }}
+  {{ $destination = $asset.RelPermalink }}
+{{ else }}
+  {{ $destination = $destination | safeURL }}
+{{ end }}
+
+{{ $poster := (.Get "poster") | default "" }}
+{{ if $asset_preview }}
+  {{ $poster = $asset_preview.RelPermalink }}
+{{ end }}
+
+
+<video style="object-fit: cover; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0;" playsinline preload=auto autoplay muted loop poster="polina.jpg">
+  <source src="{{$destination}}" type="video/{{$video_type}}">
+</video>
+
+<header style="position: static; height: 100vh; text-align: center; display: flex; align-items: center; justify-content: center; background-color: linear-gradient(180deg, rgba(0, 0, 128, 0), rgba(0, 0, 128, 1));">
+  <h1>
+    This is Ölm
+  </h1>
+</header>
+
