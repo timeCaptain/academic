@@ -14,23 +14,17 @@ subtitle:
 
 content:
   # Automatically link email and phone or display as text?
-  autolink: false
+  autolink: true
   
-  #Email form provider
+  # Email form provider
   form:
     provider: netlify
-   formspree:
-    id:
-   netlify:
-    # Enable CAPTCHA challenge to reduce spam?
+    formspree:
+      id:
+    netlify:
+      # Enable CAPTCHA challenge to reduce spam?
       captcha: true
   
 design:
   columns: '2'
 ---
-
-content:
-  form:
-    provider: netlify
-    netlify:
-      captcha: true
